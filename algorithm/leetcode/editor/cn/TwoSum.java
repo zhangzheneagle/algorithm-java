@@ -44,6 +44,8 @@
 
 package leetcode.editor.cn;
 
+import java.util.HashMap;
+
 public class TwoSum {
     public static void main(String[] args) {
         Solution solution = new TwoSum().new Solution();
@@ -53,7 +55,8 @@ public class TwoSum {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        public int[] twoSum(int[] nums, int target) {
+        // 暴力穷举法
+        public int[] twoSum1(int[] nums, int target) {
             if (nums == null || nums.length < 2) {
                 return null;
             }
@@ -65,6 +68,21 @@ public class TwoSum {
                         return new int[]{i, j};
                     }
                 }
+            }
+            return null;
+        }
+
+        // 使用Hash算法解决
+        public int[] twoSum(int[] nums, int target) {
+
+            HashMap<Integer, Integer> map = new HashMap<>();
+            map.put(nums[0], 0);
+
+            for (int i = 1; i < nums.length; i++) {
+                if (map.containsKey(target - nums[i])) {
+                    return new int[]{map.get(target - nums[i]), i};
+                }
+                map.put(nums[i], i);
             }
             return null;
         }
